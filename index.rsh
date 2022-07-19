@@ -7,8 +7,14 @@ export const main = Reach.App(() => {
     get: Fun([], UInt),
     check: Fun([MUInt, MUInt], Null),
   };
-  const A = Participant('Alice', common);
-  const B = Participant('Bob', common);
+  const autobotInteract = {
+    ...common,
+  };
+  const decepticonInteract = {
+    ...common,
+  };
+  const A = Participant('Autobot', autobotInteract);
+  const B = Participant('Decepticon', decepticonInteract);
   init();
 
   A.publish();
@@ -24,6 +30,13 @@ export const main = Reach.App(() => {
   require(m[A] == MUInt.Some(ap), "m[A] is Some(ap)");
   delete m[A];
   commit();
+
+  // B.only(() => {
+  //   const d = declassify(interact.get());
+  //   const de = d;
+  // });
+  // B.publish(d, de);
+  // commit();
 
   exit();
 });
